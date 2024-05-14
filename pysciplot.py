@@ -2,15 +2,19 @@ import openpyxl
 import numpy as np
 import matplotlib.pyplot as plt
 from configparser import ConfigParser
+import os
 
 ## import custom function
-import init_function.func as fun
-import init_function.io as io
+import func
+import func_io
 
-x=np.arange(0,10,0.5)
-y=x**2
+xlsx_data=func_io.Readxlsx('data.xlsx')
+data=func_io.Getdata(xlsx_data,type='xy')
 
-fun.New_fig(fig_size=(7,7))
-fun.Plot(x,y,label="func of y")
-fun.Legend()
+func.New_fig(fig_size=(7,7))
+
+for i in range(len(data)):
+    print(i)
+    func.Plot(data[i][0],data[i][1],label=data[i][2],linenumber=i)
+func.Legend()
 plt.show()
